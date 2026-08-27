@@ -872,7 +872,51 @@ Durante el curso se desarrolló una **API REST profesional** basada en una **arq
 
 Paso 1 implementar el jwt en el archivo pom.xml
 
+1.1 instalar dependencias.
+
+opcion 1: si estas en windows, correr el comando en la carpeta raiz, puedes usar powershell
+
+```powershell
+(Get-Content pom.xml) -replace '</dependencies>', "    <!-- Dependencias JJWT -->`n        <dependency>`n            <groupId>io.jsonwebtoken</groupId>`n            <artifactId>jjwt-api</artifactId>`n            <version>0.11.5</version>`n        </dependency>`n        <dependency>`n            <groupId>io.jsonwebtoken</groupId>`n            <artifactId>jjwt-impl</artifactId>`n            <version>0.11.5</version>`n            <scope>runtime</scope>`n        </dependency>`n        <dependency>`n            <groupId>io.jsonwebtoken</groupId>`n            <artifactId>jjwt-jackson</artifactId>`n            <version>0.11.5</version>`n            <scope>runtime</scope>`n        </dependency>`n    </dependencies>" | Set-Content pom.xml; .\mvnw.cmd clean dependency:resolve
+
+```
+
+### Opcion 2:
+
+Pegar en pom.xml las 3 etiquetas <dependency>.
+
+```
+<!-- Dependencias para JWT (JSON Web Token) -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+```
+
+luego correr el comando 
+
+En Windows:
+
+```powershell
+ .\mvnw.cmd clean dependency:resolve
+```
+
 Paso 2 Crear el jwt.Util.java
+
 ```bash
 src/main/java/com/example/project/config/JwtUtils.java
 
@@ -887,16 +931,21 @@ src/main/java/com/example/project/config/JwtAuthenticationFilter.java
 
 Paso 4 AuthDTO.java y AuthController.java
 1 DTO de autenticacion (AuthDTO.java)
+
 ```bash
 src/main/java/com/example/project/dto/AuthDTO.java
 
 ```
 
 4.1 Controlador de Autenticación (AuthController.java)
+
 ```bash
 src/main/java/com/example/project/controller/AuthController.java
 ```
+
 Paso 5 
+
 ```bash
 rc/main/java/com/example/project/config/SecurityConfig.java
 ```
+
