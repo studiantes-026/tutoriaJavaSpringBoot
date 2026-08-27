@@ -866,3 +866,37 @@ El flujo completo del proyecto puede resumirse de la siguiente manera:
 ## Resultado Final
 
 Durante el curso se desarrolló una **API REST profesional** basada en una **arquitectura en capas**, aplicando buenas prácticas de desarrollo backend con **Spring Boot**, **Spring Data JPA**, **Hibernate** y **PostgreSQL**, utilizando relaciones entre entidades, repositorios, servicios, controladores, DTOs y consultas personalizadas para construir un sistema mantenible, escalable y preparado para proyectos reales.
+
+
+# Tarea implementa el JWT en el repo
+
+Paso 1 implementar el jwt en el archivo pom.xml
+
+Paso 2 Crear el jwt.Util.java
+```bash
+src/main/java/com/example/project/config/JwtUtils.java
+
+```
+
+Paso 3 JwtAuthenticationFilter.java
+
+```bash
+src/main/java/com/example/project/config/JwtAuthenticationFilter.java
+
+```
+
+Paso 4 AuthDTO.java y AuthController.java
+1 DTO de autenticacion (AuthDTO.java)
+```bash
+src/main/java/com/example/project/dto/AuthDTO.java
+
+```
+
+4.1 Controlador de Autenticación (AuthController.java)
+```bash
+src/main/java/com/example/project/controller/AuthController.java
+```
+Paso 5 
+```bash
+rc/main/java/com/example/project/config/SecurityConfig.java
+```
