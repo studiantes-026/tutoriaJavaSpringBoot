@@ -37,15 +37,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 String username = jwtUtils.obtenerUsernameDelToken(token);
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,
-                        null,
-                        new ArrayList<>());
+                // Extraer el rol empaquetado en el token-Claim personalizado donde se enpaqueta el Rol.
+                String rol = jwtUtils.obtenerRolDelToken(token);
 
+                // Creamos la lista de autoridades que spring security necesita para autenticar al usuario.
+                List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(rol));
+
+                // Instanciar el objeto de autenticacion registrando las autoridades.
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+
+                // Registrar el objeto de autenticacion en el contexto de seguridad.
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
         filterChain.doFilter(request, respose);
-
     }
-
 }

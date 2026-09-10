@@ -26,7 +26,11 @@ public class Usuario {
 
     @Column(name = "email", nullable = false, unique = true, length = 150)
     private String email;
-    
+
+    // nuevo campo: guardar el rol usuario (ejm: ROLE_USER, ROLE_ADMIN, etc.)
+    @Column(name = "rol", nullable = false, length = 50)
+    private String rol;
+
     @Column(name = "fecha_creacion", updatable = false)
     private LocalDateTime fechaCreacion;
 
@@ -37,10 +41,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email) { 
+    public Usuario(String nombre, String email, String rol) {
         this.nombre = nombre;
         this.email = email;
         this.fechaCreacion = LocalDateTime.now();
+        this.rol = rol;
     }
 
     // Getters y Setters
@@ -74,7 +79,7 @@ public class Usuario {
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
-    }  
+    }
 
     public List<Pedido> getPedidos() {
         return pedidos;
@@ -82,5 +87,14 @@ public class Usuario {
 
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    // nuevo getter y setter para el rol
+    public String getRol() { re
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
