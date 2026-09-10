@@ -21,6 +21,7 @@ public class JwtUtils {
     public String generarToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("rol", rol) // nuevo: agregar el rol al token-Claim personalizado donde se enpaqueta el Rol.
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SECRET_KEY)
@@ -37,6 +38,19 @@ public class JwtUtils {
                 .getBody()
                 .getSubject();
 
+    }
+
+    // nuevo: obtener el rol del token-Claim personalizado donde se enpaqueta el Rol.
+    public String obtenerRolDelToken(String token) {
+        return obtenerClaims(token).get("rol", String.class);
+    }
+
+    private claims obtenerClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(SECRET_KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public boolean validarToken(String token) {
