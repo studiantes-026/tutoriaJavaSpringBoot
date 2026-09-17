@@ -90,7 +90,7 @@ public class Usuario {
     }
 
     // nuevo getter y setter para el rol
-    public String getRol() { re
+    public String getRol() {
         return rol;
     }
 

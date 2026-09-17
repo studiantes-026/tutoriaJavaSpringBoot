@@ -1,5 +1,6 @@
 package com.example.project.config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -18,7 +19,7 @@ public class JwtUtils {
 
     // @param
     // @return
-    public String generarToken(String username) {
+    public String generarToken(String username, String rol) {
         return Jwts.builder()
                 .setSubject(username)
                 .claim("rol", rol) // nuevo: agregar el rol al token-Claim personalizado donde se enpaqueta el Rol.
@@ -45,7 +46,7 @@ public class JwtUtils {
         return obtenerClaims(token).get("rol", String.class);
     }
 
-    private claims obtenerClaims(String token) {
+    private Claims obtenerClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
                 .build()
